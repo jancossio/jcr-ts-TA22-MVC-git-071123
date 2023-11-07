@@ -74,15 +74,15 @@ public class Queries {
 			Statement stdb = conexion.createStatement();
 			stdb.executeUpdate(Querydb);
 			
-			String selectAll = "SELECT * FROM cliente;";
+			String selectAll = "SELECT * FROM cientifico;";
 			
 			PreparedStatement ps = conexion.prepareStatement(selectAll);
 			ResultSet rs = ps.executeQuery();
 				
 			while(rs.next()) {
 				cien = new Cientifico();
-				cien.setDni(selectAll);
-				cien.setNomApels(selectAll);
+				cien.setDni(rs.getString("dni"));
+				cien.setNomApels(rs.getString("nomApels"));
 				cientificos.add(cien);
 				}
 			System.out.println("Tabla consultada con exito");
@@ -109,8 +109,8 @@ public class Queries {
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				cien.setDni(slc1);
-				cien.setNomApels(slc1);
+				cien.setDni(rs.getString("dni"));
+				cien.setNomApels(rs.getString("nomApels"));
 				System.out.println("Tabla consultada con exito");
 				return cien;
 			}else {
@@ -131,12 +131,11 @@ public class Queries {
 			Statement stdb = conexion.createStatement();
 			stdb.executeUpdate(Querydb);
 			
-			String upd1 = "UPDATE cientifico SET dni=?, nomApels=? WHERE id = ?;";
+			String upd1 = "UPDATE cientifico SET nomApels=? WHERE dni = ?;";
 			
 			PreparedStatement prepStat = conexion.prepareStatement(upd1);
-			prepStat.setString(1, cien.getDni());
-			prepStat.setString(2,  cien.getNomApels());
-			prepStat.setString(3,  dni);
+			prepStat.setString(1, cien.getNomApels());
+			prepStat.setString(2,  dni);
 
 			prepStat.execute();
 			
@@ -155,7 +154,7 @@ public class Queries {
 			Statement stdb = conexion.createStatement();
 			stdb.executeUpdate(Querydb);
 			
-			String dlt1 = "DELETE FROM cientifico WHERE id = ?;";
+			String dlt1 = "DELETE FROM cientifico WHERE dni = ?;";
 			
 			PreparedStatement prepStat = conexion.prepareStatement(dlt1);
 			prepStat.setString(1, dni);
@@ -273,7 +272,7 @@ public class Queries {
 			prepStat.setString(3, id);
 			prepStat.execute();
 		
-			System.out.println("El video ha sido actualizado!");
+			System.out.println("El proyecto ha sido actualizado!");
 			return true;
 		}catch(SQLException ex) {
 		//Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
@@ -316,6 +315,7 @@ public class Queries {
 			ps = conexion.prepareStatement(ins1);
 			ps.setString(1, asig.getDni());			
 			ps.setString(2, asig.getId());
+			System.out.println(" al : "+ps);
 			ps.execute();
 			
 			System.out.println("Tabla rellenada con exito");
@@ -374,7 +374,7 @@ public class Queries {
 			ResultSet rs = ps.executeQuery();
 		
 			if(rs.next()) {
-				asig.setDni(dni);
+				asig.setDni(rs.getString("dni"));
 				asig.setId(rs.getString("id"));
 				System.out.println("Tabla consultada con exito");
 				return asig;

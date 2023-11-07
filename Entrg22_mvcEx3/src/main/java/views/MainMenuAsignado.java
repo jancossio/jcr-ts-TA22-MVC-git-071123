@@ -43,7 +43,7 @@ public class MainMenuAsignado extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		titulo = new JLabel("Base de datos: proyectos");
+		titulo = new JLabel("Base de datos: asignacion");
 		titulo.setBounds(147, 6, 159, 24);
 		contentPane.add(titulo);
 		
@@ -120,6 +120,6 @@ public class MainMenuAsignado extends JFrame {
 	
 	public void setController(Controller controller) {
 		this.controller = controller;
-		controller.fillTableProyecto();
+		controller.fillTableAsignado();
 	}
 }

@@ -320,7 +320,7 @@ public class Controller {
 			mainMenuVideo.getTable().setModel(tbl);
 		}
 		
-		//END_VIDEO_MAIN_MENU-FUNCTIONS
+	//END_VIDEO_MAIN_MENU-FUNCTIONS
 	
 	
 	//CLIENT_INSERT_MENU
@@ -361,10 +361,19 @@ public class Controller {
 				JOptionPane.showMessageDialog(null,"Se ha fallado al agregar el nuevo cliente");
 			}
 			fillTableClient();
+			ereaseAllInputClientFields();
 			insertMenuClient.setVisible(false);
 		}catch(NumberFormatException nfe) {
 			JOptionPane.showMessageDialog(null,"Los parametros introducidos no son correctos");
 		}
+	}
+	
+	public void ereaseAllInputClientFields() {
+		insertMenuClient.getNombTextField_1().setText("");
+		insertMenuClient.getApelTextField_2().setText("");
+		insertMenuClient.getDirTextField_3().setText("");
+		insertMenuClient.getDniTextField_4().setText("");
+		insertMenuClient.getFechTextField_5().setText("");
 	}
 	
 	//END_CLIENT_INSERT_FUNCTIONS
@@ -405,11 +414,19 @@ public class Controller {
 				JOptionPane.showMessageDialog(null,"Se ha fallado al agregar el nuevo video");
 			}
 			fillTableVideo();
+			ereaseAllInputVideoFields();
 			insertMenuVideo.setVisible(false);
 		}catch(NumberFormatException nfe) {
 			JOptionPane.showMessageDialog(null,"Los parametros introducidos no son correctos");
 		}
 	}
+	
+	public void ereaseAllInputVideoFields() {
+		insertMenuVideo.getTituloTextField_1().setText("");
+		insertMenuVideo.getDirectorTextField_2().setText("");
+		insertMenuVideo.getIDClientDirTextField_3().setText("");
+	}
+	
 	
 	//END_VIDEO_INSERT_FUNCTIONS
 	

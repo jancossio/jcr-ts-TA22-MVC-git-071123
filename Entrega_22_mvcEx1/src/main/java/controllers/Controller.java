@@ -150,7 +150,7 @@ public class Controller{
 	//END_MAIN_MENU-FUNCTIONS
 	
 	
-	//INSERT_MENU
+	//INSERT_MENU_FUNCTIONS
 	
 	ActionListener CloseInsertWindow = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -188,13 +188,22 @@ public class Controller{
 				JOptionPane.showMessageDialog(null,"Se ha fallado al agregar el nuevo cliente");
 			}
 			updateTable();
+			ereaseAllInputFields();
 			hideInsertMenu();
 		}catch(NumberFormatException nfe) {
 			JOptionPane.showMessageDialog(null,"Los parametros introducidos no son correctos");
 		}
 	}
 	
-	//END_CANCEL_BUTTON_FUNCTIONS
+	public void ereaseAllInputFields() {
+		insertMenu.getNombTextField_1().setText("");
+		insertMenu.getApelTextField_2().setText("");
+		insertMenu.getDirTextField_3().setText("");
+		insertMenu.getDniTextField_4().setText("");
+		insertMenu.getFechTextField_5().setText("");
+	}
+	
+	//END_INSERT_MENU_FUNCTIONS
 	
 	
 	//UPDATE_MENU-FUNCTIONS

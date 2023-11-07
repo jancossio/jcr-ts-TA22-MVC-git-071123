@@ -100,7 +100,7 @@ public class InsertMenu extends JFrame {
 		contentPane.add(btnConfirmar);
 		
 		lblOrder = new JLabel("Introduce los parametros del nuevo cliente:");
-		lblOrder.setBounds(52, 11, 219, 23);
+		lblOrder.setBounds(52, 11, 241, 23);
 		contentPane.add(lblOrder);
 		
 		cancelButton = new JButton("Cancelar");

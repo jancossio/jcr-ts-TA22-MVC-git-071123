@@ -152,7 +152,7 @@ public class Controller {
 	//END_CHOSE_TABLE_MENU-FUNCTIONS
 	
 	
-	//CLIENT_MAIN_MENU-FUNCTIONS
+	//CIENTIFICO_MAIN_MENU-FUNCTIONS
 	
 	public void StartMainMenuCientifico() {
 		
@@ -247,10 +247,10 @@ public class Controller {
 		mainMenuCientifico.getTable().setModel(tbl);
 	}
 	
-	//END_CLIENT_MAIN_MENU-FUNCTIONS
+	//END_CIENTIFICO_MAIN_MENU-FUNCTIONS
 	
 	
-	//VIDEO_MAIN_MENU-FUNCTIONS
+	//PROYECTO_MAIN_MENU-FUNCTIONS
 	
 		public void StartMainMenuProyecto() {
 			
@@ -344,10 +344,10 @@ public class Controller {
 			mainMenuProyecto.getTable().setModel(tbl);
 		}
 		
-		//END_VIDEO_MAIN_MENU-FUNCTIONS
+		//END_PROYECTO_MAIN_MENU-FUNCTIONS
 	
 		
-		//VIDEO_MAIN_MENU-FUNCTIONS
+		//ASIGNADO_MAIN_MENU-FUNCTIONS
 		
 		public void StartMainMenuAsignado() {
 				
@@ -409,19 +409,20 @@ public class Controller {
 				String[] colmn = new String[2];
 				tbl.addColumn("DNI");
 				tbl.addColumn("ID");
-				asignados = queries.selectAllAsignadoAData();;
+				asignados = queries.selectAllAsignadoAData();
+				System.out.println("Asignados: "+asignados);
 				for(int i=0; i<asignados.size(); i++) {
 					colmn[0] = asignados.get(i).getDni().toString();
 					colmn[1] = asignados.get(i).getId().toString();
 					tbl.addRow(colmn);
 				}
-				mainMenuProyecto.getTable().setModel(tbl);
+				mainMenuAsignado.getTable().setModel(tbl);
 			}
 			
 		//END_ASIGNADO_MAIN_MENU-FUNCTIONS
 		
 	
-	//CLIENT_INSERT_MENU
+	//CIENTIFICO_INSERT_MENU
 	
 	ActionListener CloseInsertCientificoWindow = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -454,10 +455,16 @@ public class Controller {
 				JOptionPane.showMessageDialog(null,"Se ha fallado al agregar el nuevo cientifico");
 			}
 			fillTableCientifico();
+			ereaseAllInputCientificoFields();
 			insertMenuCientifico.setVisible(false);
 	}
 	
-	//END_CLIENT_INSERT_FUNCTIONS
+	public void ereaseAllInputCientificoFields() {
+		insertMenuCientifico.getDniTextField().setText("");
+		insertMenuCientifico.getNomApelTextField().setText("");
+	}
+	
+	//END_CIENTIFICO_INSERT_FUNCTIONS
 	
 	
 	//PROYECTO_INSERT_MENU
@@ -490,15 +497,22 @@ public class Controller {
 			proyecto.setHoras(Integer.parseInt(insertMenuProyecto.getHorasTextField().getText()));
 			boolean res = queries.insertProyectoData(proyecto);
 			if(res) {
-				JOptionPane.showMessageDialog(null,"El nuevo video se ha agregado correctamente");
+				JOptionPane.showMessageDialog(null,"El nuevo proyecto se ha agregado correctamente");
 			}else {
-				JOptionPane.showMessageDialog(null,"Se ha fallado al agregar el nuevo video");
+				JOptionPane.showMessageDialog(null,"Se ha fallado al agregar el nuevo proyecto");
 			}
 			fillTableProyecto();
+			ereaseAllInputProyectosFields();
 			insertMenuProyecto.setVisible(false);
 		}catch(NumberFormatException nfe) {
 			JOptionPane.showMessageDialog(null,"Los parametros introducidos no son correctos");
 		}
+	}
+	
+	public void ereaseAllInputProyectosFields() {
+		insertMenuProyecto.getIdTextField().setText("");
+		insertMenuProyecto.getNombreTextField().setText("");
+		insertMenuProyecto.getHorasTextField().setText("");
 	}
 	
 	//END_PROYECTO_INSERT_FUNCTIONS
@@ -527,7 +541,7 @@ public class Controller {
 	public void insertAsignado() {
 		Asignado_A asignado = new Asignado_A();
 		
-			asignado.setDni(insertMenuAsignado.getIdTextField().getText());
+			asignado.setDni(insertMenuAsignado.getDniTextField().getText());
 			asignado.setId(insertMenuAsignado.getIdTextField().getText());
 			boolean res = queries.insertAsignadoAData(asignado);
 			if(res) {
@@ -535,15 +549,21 @@ public class Controller {
 			}else {
 				JOptionPane.showMessageDialog(null,"Se ha fallado al agregar la nueva asignacion");
 			}
-			fillTableProyecto();
+			fillTableAsignado();
+			ereaseAllInputAsignadoFields();
 			insertMenuProyecto.setVisible(false);
 	}
 	
-	//END_VIDEO_INSERT_FUNCTIONS
+	public void ereaseAllInputAsignadoFields() {
+		insertMenuAsignado.getDniTextField().setText("");
+		insertMenuAsignado.getDniTextField().setText("");
+	}
+	
+	//END_ASIGNADO_INSERT_FUNCTIONS
 	
 	
 	
-	//CLIENT_UPDATE_MENU-FUNCTIONS
+	//CIENTIFICO_UPDATE_MENU-FUNCTIONS
 	
 	ActionListener ConfirmUpdateCientifico = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -560,9 +580,9 @@ public class Controller {
 			}
 			
 			if(res) {
-				JOptionPane.showMessageDialog(null,"El cliente se ha actualizado correctamente");
+				JOptionPane.showMessageDialog(null,"El cientifico se ha actualizado correctamente");
 			}else {
-				JOptionPane.showMessageDialog(null,"Se ha fallado al actualizar el cliente");
+				JOptionPane.showMessageDialog(null,"Se ha fallado al actualizar el cientifico");
 			}
 			fillTableCientifico();
 			updateMenuCientifico.setVisible(false);
@@ -583,10 +603,10 @@ public class Controller {
 		updateMenuCientifico.getTextFieldNomApel().setText(values[1]);
 	}
 	
-	//END_UPDATE_CLIENT_MENU-FUNCTIONS
+	//END_UPDATE_CIENTIFICO_MENU-FUNCTIONS
 	
 	
-	//VIDEOS_UPDATE_MENU-FUNCTIONS
+	//PROYECTOS_UPDATE_MENU-FUNCTIONS
 	
 		ActionListener ConfirmUpdateProyecto = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -608,9 +628,9 @@ public class Controller {
 					}	
 				}
 				if(res) {
-					JOptionPane.showMessageDialog(null,"El cliente se ha actualizado correctamente");
+					JOptionPane.showMessageDialog(null,"El proyecto se ha actualizado correctamente");
 				}else {
-					JOptionPane.showMessageDialog(null,"Se ha fallado al actualizar el cliente");
+					JOptionPane.showMessageDialog(null,"Se ha fallado al actualizar el proyecto");
 				}
 				fillTableProyecto();
 				updateMenuProyecto.setVisible(false);
@@ -632,10 +652,10 @@ public class Controller {
 			updateMenuProyecto.getTextFieldHoras().setText(values[2]);
 		}
 		
-	//END_VIDEOS_UPDATE_MENU-FUNCTIONS
+	//END_PROYECTOS_UPDATE_MENU-FUNCTIONS
 	
 	
-	//DELETE_CLIENT_MENU-FUNCTIONS
+	//DELETE_CIENTIFICO_MENU-FUNCTIONS
 	
 	ActionListener ConfirmCientificoDelete = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -651,9 +671,9 @@ public class Controller {
 			}
 			
 			if(res) {
-				JOptionPane.showMessageDialog(null,"El cliente se ha eliminado correctamente");
+				JOptionPane.showMessageDialog(null,"El cientifico se ha eliminado correctamente");
 			}else {
-				JOptionPane.showMessageDialog(null,"Se ha fallado al borrar el cliente");
+				JOptionPane.showMessageDialog(null,"Se ha fallado al borrar el cientifico");
 			}
 			fillTableCientifico();
 			deleteMenuCientifico.setVisible(false);
@@ -678,10 +698,10 @@ public class Controller {
 		deleteMenuCientifico.getTable().setModel(tbl);
 	}
 	
-	//END_DELETE_CLIENT_MENU-FUNCTIONS
+	//END_DELETE_CIENTIFICO_MENU-FUNCTIONS
 	
 	
-	//DELETE_VIDEOS_MENU-FUNCTIONS
+	//DELETE_PROYECTO_MENU-FUNCTIONS
 	
 		ActionListener ConfirmProyectoDelete = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -693,9 +713,9 @@ public class Controller {
 					}
 				
 				if(res) {
-					JOptionPane.showMessageDialog(null,"El video se ha eliminado correctamente");
+					JOptionPane.showMessageDialog(null,"El proyecto se ha eliminado correctamente");
 				}else {
-					JOptionPane.showMessageDialog(null,"Se ha fallado al borrar el video");
+					JOptionPane.showMessageDialog(null,"Se ha fallado al borrar el proyecto");
 				}
 				fillTableProyecto();
 				deleteMenuProyecto.setVisible(false);
@@ -721,7 +741,7 @@ public class Controller {
 			deleteMenuProyecto.getTable().setModel(tbl);
 		}
 		
-	//END_DELETE_VIDEOS_MENU-FUNCTIONS
+	//END_DELETE_PROYECTO_MENU-FUNCTIONS
 	
 	
 	//DELETE_ASIGNADOS_MENU-FUNCTIONS
@@ -740,9 +760,9 @@ public class Controller {
 				}
 				
 				if(res) {
-					JOptionPane.showMessageDialog(null,"El video se ha eliminado correctamente");
+					JOptionPane.showMessageDialog(null,"El proyecto se ha eliminado correctamente");
 				}else {
-					JOptionPane.showMessageDialog(null,"Se ha fallado al borrar el video");
+					JOptionPane.showMessageDialog(null,"Se ha fallado al borrar el proyecto");
 				}
 				fillTableAsignado();
 				deleteMenuAsignado.setVisible(false);
@@ -766,10 +786,10 @@ public class Controller {
 			deleteMenuAsignado.getTable().setModel(tbl);
 		}
 		
-	//END_DELETE_VIDEOS_MENU-FUNCTIONS
+	//END_DELETE_ASIGNADOS_MENU-FUNCTIONS
 	
 	
-	//SEARCH_FUNCTIONS_CLIENT
+	//SEARCH_FUNCTIONS_CIENTIFICO
 	
 	ActionListener CloseSearchCientificoWindow = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -810,10 +830,10 @@ public class Controller {
 		searchMenuCientifico.getTable().setModel(tbl);
 	}
 	
-	//END_SEARCH_FUNCTIONS_CLIENT
+	//END_SEARCH_FUNCTIONS_CIENTIFICO
 	
 	
-	//SEARCH_FUNCTIONS_VIDEO
+	//SEARCH_FUNCTIONS_PROYECTO
 	
 		ActionListener CloseSearchProyectoWindow = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -854,10 +874,10 @@ public class Controller {
 			searchMenuProyecto.getTable().setModel(tbl);
 		}
 		
-	//END_SEARCH_FUNCTIONS_VIDEO
+	//END_SEARCH_FUNCTIONS_PROYECTO
 	
 	
-		//SEARCH_FUNCTIONS_VIDEO
+		//SEARCH_FUNCTIONS_ASIGNADO
 		
 		ActionListener CloseSearchAsignadoWindow = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -871,12 +891,12 @@ public class Controller {
 								
 			if(!searchMenuAsignado.getTextFieldDni().getText().equals("") && !searchMenuAsignado.getTextFieldId().getText().equals("")){
 
-					String tmpDni = searchMenuProyecto.getTextField().getText();
-					String tmpId = searchMenuProyecto.getTextField().getText();
+					String tmpDni = searchMenuAsignado.getTextFieldDni().getText();
+					String tmpId = searchMenuAsignado.getTextFieldId().getText();
 						
 					Asignado_A asig = queries.selectAsignadoAData(tmpDni,tmpId);
 					if(asig != null) {
-						fillTableSearchProyectos(asig);
+						fillTableSearchAsignado(asig);
 					}else {
 						JOptionPane.showMessageDialog(null, "No se ha encontrado la asignacion con el ID introducido");
 					}
@@ -884,7 +904,7 @@ public class Controller {
 			}
 		};
 		
-		public void fillTableSearchProyectos(Asignado_A asignado) {
+		public void fillTableSearchAsignado(Asignado_A asignado) {
 			DefaultTableModel tbl = new DefaultTableModel();
 			String[] colmn = new String[4];
 			tbl.addColumn("DNI");
@@ -897,7 +917,7 @@ public class Controller {
 			searchMenuProyecto.getTable().setModel(tbl);
 		}
 		
-	//END_SEARCH_FUNCTIONS_VIDEO
+	//END_SEARCH_FUNCTIONS_ASIGNADO
 		
 		
 	//CHOSE_TABLE_FUNCTIONS_

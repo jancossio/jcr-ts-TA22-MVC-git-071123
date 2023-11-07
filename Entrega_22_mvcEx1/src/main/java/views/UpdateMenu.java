@@ -63,7 +63,7 @@ public class UpdateMenu extends JFrame {
 		contentPane.add(confirmButton);
 		
 		lblTitulo = new JLabel("Modifica los parametros que desees modificar del cliente:");
-		lblTitulo.setBounds(51, 11, 308, 23);
+		lblTitulo.setBounds(51, 11, 320, 23);
 		contentPane.add(lblTitulo);
 		
 		textFieldNomb = new JTextField();
